@@ -3,6 +3,7 @@ import classes from './Auth.module.css';
 import Button from '../../components/UI/button/Button';
 import Input from '../../components/UI/Input/Input';
 import is from 'is_js';
+import axios from 'axios';
 
 export default class Auth extends React.Component {
   state = {
@@ -35,11 +36,38 @@ export default class Auth extends React.Component {
     }
   };
 
-  loginHandler = () => {
+  loginHandler = async () => {
+    const authData = {
+      email: this.state.form.email.value,
+      password: this.state.form.password.value,
+      returnSecureToken: true
+    };
 
+    try {
+      const response = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBMWZrMMw8LI7k4chECb7Ft6BkLHHez2TM`, authData);
+
+      console.log(response.data)
+
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
-  registerHandler = () => {
+  registerHandler = async () => {
+    const authData = {
+      email: this.state.form.email.value,
+      password: this.state.form.password.value,
+      returnSecureToken: true
+    };
+
+    try {
+      const response = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBMWZrMMw8LI7k4chECb7Ft6BkLHHez2TM`, authData);
+
+      console.log(response.data)
+
+    } catch (error) {
+      console.log('error', error);
+    }
 
   };
 
